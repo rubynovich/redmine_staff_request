@@ -29,7 +29,7 @@ class StaffRequestsController < ApplicationController
       time_period(params[:time_period_created_on], :created_on)
 
     @count = @scope.count
-    @pages = Paginator.new @count, @limit, params[:page]
+    @pages = Paginator.new(self, @count, @limit, params[:page])
     @offset ||= @pages.current.offset
     @collection = @scope.limit(@limit).offset(@offset).order(sort_clause).all
   end
