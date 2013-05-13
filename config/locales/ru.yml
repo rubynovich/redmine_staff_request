@@ -1,0 +1,42 @@
+# Russian strings go here for Rails i18n
+ru:
+  # my_label: "My label"
+  label_staff_request_plural: "Заявки на персонал"
+  label_staff_request_name: "Наименование позиции"
+  label_staff_request: "Заявка на персонал"
+  label_new_staff_request: "Новая заявка на персонал"
+  label_staff_request_new: "Добавить заявку на персонал"
+  label_edit_staff_request: "Правка заявки на персонал"
+  field_company_name: "Компания"
+  field_department_name: "Подразделение"
+  field_boss_name: "Руководитель"
+  field_position_count: "Количество позиций"
+  field_position_type_name: "Тип позиции"
+  field_position_type_comment: "Дополнение к типу позиции"
+  field_employment_type_name: "Тип занятости"
+  field_require_education_name: "Образование"
+  field_priority_name: "Приоритет"
+  field_require_program_skills: "Навыки работы с ПО"
+  field_require_experience: "Опыт работы"
+  field_functional_responsibilities: "Функциональные обязанности"
+  staff_requiest:
+    require_education_name:
+      - "Высшее"
+      - "Неоконченное высшее"
+      - "Среднее"
+    company_name:
+      - "ООО НВК"
+      - "ООО ГорКапСтрой"
+      - "ООО НПП Строительство"
+    position_type_name:
+      - "Новая"
+      - "Замена"
+      - "Временная замена"
+    employment_type_name:
+      - "Полная"
+      - "Частичная"
+    priority_name:
+      - "Высокий"
+      - "Нормальный"
+      - "Низкий"
+  message_staff_request_subject: "[Заявка на персонал] %{name}, %{position_count} шт."

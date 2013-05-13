@@ -1,0 +1,52 @@
+.contextual
+  = link_to l(:button_add), {:action => :new}, :class => 'icon icon-add'
+  = link_to l(:button_update), {:action => :edit, :id => @object}, :class => 'icon icon-edit'
+  = link_to l(:button_delete), {:action => :destroy, :id => @object}, :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del'
+
+%h2
+  = link_to l(:label_staff_request), :action => :index
+  &#187;
+  = h(@object.name)
+  = "(#{@object.position_count})"
+
+.issue.details
+  %table.attributes
+    %tr
+      %th= l(:field_company_name)+":"
+      %td= h(@object.company_name)
+      %th= l(:field_position_type_name)+":"
+      %td= h(@object.position_type_name)
+    %tr
+      %th= l(:field_department_name)+":"
+      %td= h(@object.department_name)
+      %th= l(:field_position_type_comment)+":"
+      %td= h(@object.position_type_comment)
+    %tr
+      %th= l(:field_boss_name)+":"
+      %td= h(@object.boss_name)
+      %th= l(:field_employment_type_name)+":"
+      %td= h(@object.employment_type_name)
+    %tr
+      %th= l(:field_priority)+":"
+      %td= h(@object.priority.try(:name))
+      %th= l(:field_require_education_name)+":"
+      %td= h(@object.require_education_name)
+    %tr
+      %th= l(:field_created_on)+":"
+      %td= format_date(@object.created_on)
+      %th= l(:field_author)+":"
+      %td= link_to_user @object.author
+  %hr
+  %p
+    %strong= l(:field_require_program_skills)
+  .wiki= textilizable @object, :require_program_skills
+  %p
+    %strong= l(:field_require_experience)
+  .wiki= textilizable @object, :require_experience
+  %p
+    %strong= l(:field_functional_responsibilities)
+  .wiki= textilizable @object, :functional_responsibilities
+
+- if @journals.present?
+  #history
+    = render :partial => 'issues/history', :locals => { :issue => @issue, :journals => @journals }

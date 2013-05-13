@@ -1,0 +1,12 @@
+%p
+  %label= l(:label_project)
+  = select_tag("settings[project_id]", project_tree_options_for_select(Project.active.all(:order => :name), :selected => Project.find(@settings[:project_id])))
+%p
+  %label= l(:label_tracker)
+  = select_tag("settings[tracker_id]", options_from_collection_for_select(Tracker.all(:order => :position), :id, :name, @settings[:tracker_id] && @settings[:tracker_id].to_i))
+%p
+  %label= l(:label_duration)
+  = text_field_tag("settings[duration]", @settings[:duration], :size => 5)
+%p
+  %label= l(:label_assigned_to)
+  = select_tag("settings[assigned_to_id]", principals_options_for_select(Principal.active.all(:order => [:lastname, :firstname]), @settings[:assigned_to_id] && @settings[:assigned_to_id].to_i))
