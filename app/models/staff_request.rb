@@ -94,6 +94,13 @@ class StaffRequest < ActiveRecord::Base
           "*#{::I18n.t('field_' + item.to_s, :default => item.to_s.humanize)}:*\n#{self.send(item)}" if self.send(item).present?
         end.join("\n\n")
     ).try(:id)
+    begin
+      User.current.approvers.each do |user|
+        ApprovalItem.create(:user_id => user.id, :issue_id => issue_id)
+      end
+    rescue
+      #TODO errors.add
+    end
     self.update_attribute(:issue_id, issue_id)
   end
 end

@@ -6,6 +6,7 @@ class StaffRequestsController < ApplicationController
   helper :sort
   include SortHelper
 
+  before_filter :require_staff_request_manager
   before_filter :find_object, :only => [:edit, :update, :show, :destroy]
   before_filter :new_object, :only => [:index, :new, :create]
 
@@ -88,4 +89,7 @@ class StaffRequestsController < ApplicationController
       journals
     end
 
+    def require_staff_request_manager
+      (render_403; return false) unless User.current.staff_request_manager?
+    end
 end

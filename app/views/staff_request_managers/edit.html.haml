@@ -1,0 +1,9 @@
+%h2
+  = link_to l(:label_staff_request_manager_plural), :action => :index
+  &#187;
+  = @object.user
+
+#content-users
+  =render :partial => 'approver'
+
+- html_title(l(:label_staff_request_manager_plural), @object.user, l(:label_administration))

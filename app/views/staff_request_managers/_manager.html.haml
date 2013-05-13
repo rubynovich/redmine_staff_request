@@ -1,0 +1,36 @@
+.splitcontentleft
+  - if @collection.any?
+    %table.list.users
+      %thead
+        %tr
+          %th= l(:label_manager)
+          %th= l(:label_approver_plural)
+          %th{:style=>"width:15%"}
+      %tbody
+        - @collection.each do |member|
+          %tr{:id=>"user-#{member.user_id}", :class => cycle('odd', 'even')}
+            %td.user
+              = link_to_user member.user
+            %td.workers
+              - member.approvers.each do |user|
+                = link_to_user user
+                %br
+            %td.buttons
+              = link_to l(:button_edit), {:action => 'edit', :id => member.id}, :class => 'icon icon-edit'
+              = link_to l(:button_delete), {:action => 'destroy', :id => member.id}, :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del'
+  - else
+    %p.nodata
+      = l(:label_no_data)
+
+.splitcontentright
+  #tab-content-users
+    - managers = User.active.not_staff_request_managers.all(:order => "lastname, firstname")
+    - if managers.any?
+      = form_for :planning_manager, :html => {:class => :edit_group} do |f|
+        %fieldset
+          %legend
+            =l(:label_staff_request_manager_new)
+          #users
+            = principals_check_box_tags 'manager_ids[]', managers
+
+          %p= submit_tag l(:button_add)

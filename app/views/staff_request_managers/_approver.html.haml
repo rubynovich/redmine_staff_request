@@ -1,0 +1,30 @@
+.splitcontentleft
+  - if @object.approvers.any?
+    %table.list.users
+      %thead
+        %tr
+          %th= l(:label_approver_plural)
+          %th{:style=>"width:15%"}
+      %tbody
+        - @object.approvers.sort.each do |member|
+          %tr{:id=>"user-#{member.id}", :class => cycle('odd', 'even')}
+            %td.user
+              = link_to_user member
+            %td.buttons
+              = link_to l(:button_delete), {:action => :destroy, :id => @object.id, :approver_id => member.id}, :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del'
+  - else
+    %p.nodata
+      = l(:label_no_data)
+
+.splitcontentright
+  #tab-content-users
+    - approvers = User.active.not_approvers(@object).all(:order => "lastname, firstname")
+    - if approvers.any?
+      = form_for @object, :html => {:class => :edit_group} do |f|
+        %fieldset
+          %legend
+            =l(:label_approver_new)
+          #users
+            = principals_check_box_tags 'approver_ids[]', approvers
+
+          %p= submit_tag l(:button_add)
