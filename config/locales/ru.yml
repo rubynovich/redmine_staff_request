@@ -10,6 +10,7 @@ ru:
   label_staff_request_manager_new: "Новый набирающий персонал"
   label_staff_request_manager_plural: "Набирающие персонал"
   label_approver_new: "Новый согласующий"
+  label_duration: "Длительность задачи"
   field_company_name: "Компания"
   field_department_name: "Подразделение"
   field_boss_name: "Руководитель"

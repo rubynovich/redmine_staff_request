@@ -33,8 +33,7 @@
             - if item.issue.present?
               = h(item.issue.status)
           %td{:align=>"left"}
-            = h(item.name)
-            = h("(#{item.position_count})")
+            = link_to h("#{item.name} (#{item.position_count})"), :action => :show, :id => item.id
           %td{:align=>"center"}= h(item.company_name)
           %td{:align=>"center"}= h(item.department_name)
           %td{:align=>"center"}= h(item.boss_name)
@@ -45,8 +44,9 @@
           %td{:align=>"center"}= link_to item.author, params.merge(:author_id => item.author_id)
           %td{:align=>"center"}= format_date(item.created_on)
           %td.buttons
-            = link_to l(:button_update), {:action => :edit, :id => item.id}, :class => 'icon icon-edit'
-            -# link_to(l(:button_delete), item_path(item), :method => :delete, :confirm => l(:text_are_you_sure), :class => 'icon icon-del')
+            - if item.author == User.current || User.current.admin?
+              = link_to l(:button_update), {:action => :edit, :id => item.id}, :class => 'icon icon-edit'
+              = link_to(l(:button_delete), {:action => :destroy, :id => item.id}, :method => :delete, :confirm => l(:text_are_you_sure), :class => 'icon icon-del')
 
   %p.pagination= pagination_links_full @pages, @count
 - else
