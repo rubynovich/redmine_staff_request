@@ -4,6 +4,8 @@ class StaffRequestManagersController < ApplicationController
 
   before_filter :require_admin
   before_filter :find_object, :only => [:edit, :update, :destroy]
+  before_filter :find_manager_candidates, :only => [:index, :autocomplete_for_manager]
+  before_filter :find_approver_candidates, :only => [:edit, :autocomplete_for_approver]
 
   def index
     @collection = model_name.all(:order => "users.lastname, users.firstname", :include => :user).select(&:user)
@@ -37,9 +39,26 @@ class StaffRequestManagersController < ApplicationController
     end
   end
 
+  def autocomplete_for_manager
+    render :layout => false
+  end
+
+  def autocomplete_for_approver
+    render :layout => false
+  end
+
   private
     def find_object
       @object = model_name.find(params[:id])
+    end
+
+    def find_manager_candidates
+      @manager_candidates = User.active.not_staff_request_managers.like(params[:q]).all(:order => "lastname, firstname")
+    end
+
+    def find_approver_candidates
+      find_object
+      @approver_candidates = User.active.not_approvers(@object).like(params[:q]).all(:order => "lastname, firstname")
     end
 
     def model_name

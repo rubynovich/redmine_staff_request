@@ -1,9 +1,9 @@
 Redmine::Plugin.register :redmine_staff_request do
-  name 'Redmine Staff Request plugin'
+  name 'Staff Request'
   author 'Roman Shipiev'
   description 'Staff request for Redmine'
   version '0.0.1'
-  url 'https://github.com/rubynovich/redmine_staff_request'
+  url 'https://bitbucket.org/rubynovich/redmine_staff_request'
   author_url 'http://roman.shipev.me'
 
   settings :default => {
