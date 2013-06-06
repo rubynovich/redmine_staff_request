@@ -9,4 +9,4 @@
   = text_field_tag("settings[duration]", @settings[:duration], :size => 5)
 %p
   %label= l(:label_assigned_to)
-  = select_tag("settings[assigned_to_id]", principals_options_for_select(Principal.active.all(:order => [:lastname, :firstname]), @settings[:assigned_to_id] && Principal.find(@settings[:assigned_to_id]))
+  = select_tag("settings[assigned_to_id]", principals_options_for_select(Principal.active.all(:order => [:lastname, :firstname]), @settings[:assigned_to_id] && Principal.find(@settings[:assigned_to_id])))
