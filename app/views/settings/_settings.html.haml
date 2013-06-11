@@ -5,7 +5,7 @@
   %label= l(:label_tracker)
   = select_tag("settings[tracker_id]", options_from_collection_for_select(Tracker.all(:order => :position), :id, :name, (@settings[:tracker_id].to_i rescue nil)))
 %p
-  %label= l(:label_staff_request_manager)
+  %label= l(:label_staff_request_manager_plural)
   = select_tag("settings[principal_id]", principals_options_for_select(Principal.active.all, (Principal.find(@settings[:principal_id]) rescue nil)))
 %p
   %label= l(:label_duration)
