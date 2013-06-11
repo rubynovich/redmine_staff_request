@@ -1,15 +1,16 @@
+= debug @settings
 %p
   %label= l(:label_project)
-  = select_tag("settings[project_id]", project_tree_options_for_select(Project.active.all(:order => :name), :selected => Project.find(@settings[:project_id])))
+  = select_tag("settings[project_id]", project_tree_options_for_select(Project.active.all(:order => :name), :selected => (Project.find(@settings[:project_id]) rescue nil)))
 %p
   %label= l(:label_tracker)
-  = select_tag("settings[tracker_id]", options_from_collection_for_select(Tracker.all(:order => :position), :id, :name, @settings[:tracker_id] && @settings[:tracker_id].to_i))
+  = select_tag("settings[tracker_id]", options_from_collection_for_select(Tracker.all(:order => :position), :id, :name, (@settings[:tracker_id].to_i rescue nil)))
 %p
   %label= l(:label_staff_request_manager)
-  = select_tag("settings[principal_id]", principal_options_for_select(Principal.active.all, :selected => Principal.find(@settings[:principal_id])))
+  = select_tag("settings[principal_id]", principals_options_for_select(Principal.active.all, (Principal.find(@settings[:principal_id]) rescue nil)))
 %p
   %label= l(:label_duration)
   = text_field_tag("settings[duration]", @settings[:duration], :size => 5)
 %p
   %label= l(:label_assigned_to)
-  = select_tag("settings[assigned_to_id]", principals_options_for_select(Principal.active.all(:order => [:lastname, :firstname]), @settings[:assigned_to_id] && Principal.find(@settings[:assigned_to_id])))
+  = select_tag("settings[assigned_to_id]", principals_options_for_select(Principal.active.all(:order => [:lastname, :firstname]), (Principal.find(@settings[:assigned_to_id]) rescue nil)))
