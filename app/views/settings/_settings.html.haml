@@ -1,4 +1,3 @@
-= debug @settings
 %p
   %label= l(:label_project)
   = select_tag("settings[project_id]", project_tree_options_for_select(Project.active.all(:order => :name), :selected => (Project.find(@settings[:project_id]) rescue nil)))
