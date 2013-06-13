@@ -7,9 +7,6 @@ Redmine::Plugin.register :redmine_staff_request do
   author_url 'http://roman.shipev.me'
 
   settings :default => {
-                       :project_id => Project.active.last.try(:id),
-                       :tracker_id => Project.active.last.trackers.first.try(:id),
-                       :principal_id => nil,
                        :duration => 7
                      },
          :partial => 'settings/settings'
