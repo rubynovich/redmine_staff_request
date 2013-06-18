@@ -9,7 +9,7 @@ Redmine::Plugin.register :redmine_staff_request do
   settings :default => {
                        :duration => 7
                      },
-         :partial => 'settings/settings'
+         :partial => 'staff_requests/settings'
 
   menu :top_menu, :staff_requests, {:controller => :staff_requests, :action => :index}, :caption => :label_staff_request_plural, :if => Proc.new{User.current.staff_request_manager?}
 

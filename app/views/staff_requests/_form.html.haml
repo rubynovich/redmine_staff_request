@@ -4,8 +4,8 @@
   .splitcontentleft
     %p= f.text_field :name, :required => true, :size => 40, :label => t(:label_staff_request_name)
     %p= f.select :company_name, company_name_for_select, :required => true, :prompt => t(:prompt_please_select)
-    %p= f.text_field :department_name, :required => true, :size => 40, :label => false
-    %p= f.text_field :boss_name, :required => true, :size => 40, :label => false
+    %p= f.text_field :department_name, :required => true, :size => 40
+    %p= f.text_field :boss_name, :required => true, :size => 40
     %p= f.text_field :position_count, :required => true, :size => 5
 
   .splitcontentright

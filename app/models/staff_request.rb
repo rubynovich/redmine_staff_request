@@ -2,8 +2,14 @@ class StaffRequest < ActiveRecord::Base
   unloadable
 
   belongs_to :issue, :dependent => :destroy
+  has_one :status, :through => :issue
   belongs_to :author, :class_name => "User", :foreign_key => "author_id"
   belongs_to :priority, :class_name => 'IssuePriority', :foreign_key => 'priority_id'
+
+  validates_presence_of :name, :author_id, :company_name, :department_name, :boss_name,
+    :position_type_name, :position_type_comment, :employment_type_name, :require_education_name,
+    :priority_id, :position_count, :require_program_skills, :require_experience,
+    :functional_responsibilities
 
   after_create :create_issue
 
