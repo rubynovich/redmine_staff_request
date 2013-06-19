@@ -3,7 +3,7 @@
 
   %form{:method => :get}
     - [:name, :boss_name, :department_name].each do |item|
-      = hidden_field_tag :item, params[item]
+      = hidden_field_tag item, params[item]
 
     %label{:for=>'company_name'}= l(:field_company_name) + ":"
     %select{:id => 'company_name', :name => 'company_name', :class => "small", :onchange => "this.form.submit(); return false;"}
