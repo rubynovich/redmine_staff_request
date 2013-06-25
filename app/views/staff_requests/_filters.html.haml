@@ -50,7 +50,7 @@
 
     .inline-block
       %label{:for=>'status_id'}= l(:field_status) + ":"
-      %select{:id => 'status_id', :name => 'status_id', :class => "small", :onchange => "this.form.submit(); return false;", :disabled => true}
+      %select{:id => 'status_id', :name => 'status_id', :class => "small", :onchange => "this.form.submit(); return false;"}
         %option
         = options_from_collection_for_select(status_id_for_select, :id, :name, params[:status_id] && params[:status_id].to_i)
 
