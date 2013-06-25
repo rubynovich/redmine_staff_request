@@ -15,7 +15,11 @@ module StaffRequestsHelper
     t(:require_education_name, :scope => :staff_requiest)
   end
 
-  def priority_for_select
+  def status_id_for_select
+    IssueStatus.all(:order => :position)
+  end
+
+  def priority_id_for_select
     IssuePriority.all(:order => :position)
   end
 
@@ -24,6 +28,6 @@ module StaffRequestsHelper
   end
 
   def author_id_for_select
-    StaffRequest.select(:author_id).uniq.all.select(&:author_id).map(&:author)
+    User.where("#{User.table_name}.id IN (SELECT #{StaffRequest.table_name}.author_id FROM #{StaffRequest.table_name})").all(:order => [:lastname, :firstname])
   end
 end

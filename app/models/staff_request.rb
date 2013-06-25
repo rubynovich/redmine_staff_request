@@ -13,6 +13,22 @@ class StaffRequest < ActiveRecord::Base
 
   after_create :create_issue
 
+  scope :issue_status, lambda {|q|
+    if q.present?
+      {:conditions =>
+        ["#{self.class.table_name}.issue_id IN (SELECT #{Issue.table_name}.id FROM #{Issue.table_name} WHERE status_id=:status_id)",
+        {:status_id => q}]}
+    end
+  }
+
+  scope :issue_priority, lambda {|q|
+    if q.present?
+      {:conditions =>
+        ["#{self.class.table_name}.issue_id IN (SELECT #{Issue.table_name}.id FROM #{Issue.table_name} WHERE priority_id=:priority_id)",
+        {:priority_id => q}]}
+    end
+  }
+
   scope :like_field, lambda {|q, field|
     if q.present?
       {:conditions =>

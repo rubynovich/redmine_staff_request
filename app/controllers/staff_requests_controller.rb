@@ -17,6 +17,8 @@ class StaffRequestsController < ApplicationController
     @limit = per_page_option
 
     @scope = object_class_name.
+      issue_status(params[:status_id]).
+      issue_priority(params[:priority_id]).
       like_field(params[:name], :name).
       like_field(params[:department_name], :department_name).
       like_field(params[:boss_name], :boss_name).

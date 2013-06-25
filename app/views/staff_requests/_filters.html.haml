@@ -1,3 +1,6 @@
+:css
+  .inline-block{ display: inline-block }
+
 %fieldset
   %legend= l(:label_filter_plural)
 
@@ -5,51 +8,63 @@
     - [:name, :boss_name, :department_name].each do |item|
       = hidden_field_tag item, params[item]
 
-    %label{:for=>'company_name'}= l(:field_company_name) + ":"
-    %select{:id => 'company_name', :name => 'company_name', :class => "small", :onchange => "this.form.submit(); return false;"}
-      %option
-      - company_name_for_select.each do |item|
-        - if params[:company_name] == item
-          %option{:value => item, :selected => "selected"}= item
-        - else
-          %option{:value => item}= item
+    .inline-block
+      %label{:for=>'company_name'}= l(:field_company_name) + ":"
+      %select{:id => 'company_name', :name => 'company_name', :class => "small", :onchange => "this.form.submit(); return false;"}
+        %option
+        - company_name_for_select.each do |item|
+          - if params[:company_name] == item
+            %option{:value => item, :selected => "selected"}= item
+          - else
+            %option{:value => item}= item
 
-    %label{:for=>'position_type_name'}= l(:field_position_type_name) + ":"
-    %select{:id => 'position_type_name', :name => 'position_type_name', :class => "small", :onchange => "this.form.submit(); return false;"}
-      %option
-      - position_type_name_for_select.each do |item|
-        - if params[:position_type_name] == item
-          %option{:value => item, :selected => "selected"}= item
-        - else
-          %option{:value => item}= item
+    .inline-block
+      %label{:for=>'position_type_name'}= l(:field_position_type_name) + ":"
+      %select{:id => 'position_type_name', :name => 'position_type_name', :class => "small", :onchange => "this.form.submit(); return false;"}
+        %option
+        - position_type_name_for_select.each do |item|
+          - if params[:position_type_name] == item
+            %option{:value => item, :selected => "selected"}= item
+          - else
+            %option{:value => item}= item
 
-    %label{:for=>'employment_type_name'}= l(:field_employment_type_name) + ":"
-    %select{:id => 'employment_type_name', :name => 'employment_type_name', :class => "small", :onchange => "this.form.submit(); return false;"}
-      %option
-      - employment_type_name_for_select.each do |item|
-        - if params[:employment_type_name] == item
-          %option{:value => item, :selected => "selected"}= item
-        - else
-          %option{:value => item}= item
+    .inline-block
+      %label{:for=>'employment_type_name'}= l(:field_employment_type_name) + ":"
+      %select{:id => 'employment_type_name', :name => 'employment_type_name', :class => "small", :onchange => "this.form.submit(); return false;"}
+        %option
+        - employment_type_name_for_select.each do |item|
+          - if params[:employment_type_name] == item
+            %option{:value => item, :selected => "selected"}= item
+          - else
+            %option{:value => item}= item
 
-    %label{:for=>'require_education_name'}= l(:field_require_education_name) + ":"
-    %select{:id => 'require_education_name', :name => 'require_education_name', :class => "small", :onchange => "this.form.submit(); return false;"}
-      %option
-      - require_education_name_for_select.each do |item|
-        - if params[:require_education_name] == item
-          %option{:value => item, :selected => "selected"}= item
-        - else
-          %option{:value => item}= item
+    .inline-block
+      %label{:for=>'require_education_name'}= l(:field_require_education_name) + ":"
+      %select{:id => 'require_education_name', :name => 'require_education_name', :class => "small", :onchange => "this.form.submit(); return false;"}
+        %option
+        - require_education_name_for_select.each do |item|
+          - if params[:require_education_name] == item
+            %option{:value => item, :selected => "selected"}= item
+          - else
+            %option{:value => item}= item
 
-    %label{:for=>'priority_id'}= l(:field_priority) + ":"
-    %select{:id => 'priority_id', :name => 'priority_id', :class => "small", :onchange => "this.form.submit(); return false;"}
-      %option
-      = options_from_collection_for_select(priority_for_select, :id, :name, params[:priority_id] && params[:priority_id].to_i)
+    .inline-block
+      %label{:for=>'status_id'}= l(:field_status) + ":"
+      %select{:id => 'status_id', :name => 'status_id', :class => "small", :onchange => "this.form.submit(); return false;", :disabled => true}
+        %option
+        = options_from_collection_for_select(status_id_for_select, :id, :name, params[:status_id] && params[:status_id].to_i)
 
-    %label{:for=>'author_id'}= l(:field_author) + ":"
-    %select{:id => 'author_id', :name => 'author_id', :class => "small", :onchange => "this.form.submit(); return false;"}
-      %option
-      = options_from_collection_for_select(author_id_for_select, :id, :name, params[:author_id] && params[:author_id].to_i)
+    .inline-block
+      %label{:for=>'priority_id'}= l(:field_priority) + ":"
+      %select{:id => 'priority_id', :name => 'priority_id', :class => "small", :onchange => "this.form.submit(); return false;"}
+        %option
+        = options_from_collection_for_select(priority_id_for_select, :id, :name, params[:priority_id] && params[:priority_id].to_i)
+
+    .inline-block
+      %label{:for=>'author_id'}= l(:field_author) + ":"
+      %select{:id => 'author_id', :name => 'author_id', :class => "small", :onchange => "this.form.submit(); return false;"}
+        %option
+        = options_from_collection_for_select(author_id_for_select, :id, :name, params[:author_id] && params[:author_id].to_i)
 
     - %w{created_on}.each do |type_date|
       %br
@@ -75,7 +90,7 @@
     %br
 
   %form{:method => :get}
-    - [:company_name, :position_type_name, :employment_type_name, :require_education_name, :priority_name, :author_id, :time_period_created_on].each do |item|
+    - [:company_name, :position_type_name, :employment_type_name, :require_education_name, :status_id, :priority_id, :author_id, :time_period_created_on].each do |item|
       = hidden_field_tag item, params[item]
 
     %label{:for=>'name'}= l(:label_staff_request_name) + ":"
