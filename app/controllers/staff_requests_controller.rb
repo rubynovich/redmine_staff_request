@@ -26,8 +26,8 @@ class StaffRequestsController < ApplicationController
       eql_field(params[:position_type_name], :position_type_name).
       eql_field(params[:employment_type_name], :employment_type_name).
       eql_field(params[:require_education_name], :require_education_name).
-      eql_field(params[:priority_id], :priority_id).
       eql_field(params[:created_on], :created_on).
+      eql_field(params[:author_id], :author_id).
       time_period(params[:time_period_created_on], :created_on)
 
     @count = @scope.count
