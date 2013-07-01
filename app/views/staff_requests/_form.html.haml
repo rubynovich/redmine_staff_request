@@ -13,7 +13,7 @@
     %p= f.text_field :position_type_comment, :size => 20
     %p= f.select :employment_type_name, employment_type_name_for_select, :required => true, :prompt => t(:prompt_please_select)
     %p= f.select :require_education_name, require_education_name_for_select, :required => true, :prompt => t(:prompt_please_select)
-    %p= f.select :priority_id, priority_for_select.map{ |item| [item.name, item.id] }, :required => true, :prompt => t(:prompt_please_select)
+    %p= f.select :priority_id, priority_id_for_select.map{ |item| [item.name, item.id] }, :required => true, :prompt => t(:prompt_please_select)
 
   %div{:style=>"clear:both"}
 
