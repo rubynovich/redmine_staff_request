@@ -6,12 +6,12 @@ class StaffRequest < ActiveRecord::Base
   belongs_to :author, :class_name => "User", :foreign_key => "author_id"
   belongs_to :priority, :class_name => 'IssuePriority', :foreign_key => 'priority_id'
 
-  validates_presence_of :name, :author_id, :company_name, :department_name, :boss_name,
-    :position_type_name, :position_type_comment, :employment_type_name, :require_education_name,
+  validates_presence_of :name, :author_id, :issue_id, :company_name, :department_name,
+    :boss_name, :position_type_name, :employment_type_name, :require_education_name,
     :priority_id, :position_count, :require_program_skills, :require_experience,
     :functional_responsibilities
 
-  after_create :create_issue
+  before_create :add_issue
 
   scope :issue_status, lambda {|q|
     if q.present?
@@ -95,9 +95,9 @@ class StaffRequest < ActiveRecord::Base
     end
   }
 
-  def create_issue
+  def add_issue
     setting = Setting[:plugin_redmine_staff_request]
-    issue_id = Issue.create(
+    self.create_issue(
       :status => IssueStatus.default,
       :tracker_id => setting[:tracker_id],
       :project_id => setting[:project_id],
@@ -105,7 +105,7 @@ class StaffRequest < ActiveRecord::Base
       :author => User.current,
       :start_date => Date.today,
       :due_date => Date.today + setting[:duration].to_i.days,
-      :priority => self.priority,
+      :priority_id => self.priority_id,
       :subject => ::I18n.t('message_staff_request_subject', :name => self.name, :position_count => self.position_count),
       :description =>
         [:company_name, :department_name, :boss_name, :position_type_name,
@@ -115,14 +115,6 @@ class StaffRequest < ActiveRecord::Base
         [:require_program_skills, :require_experience, :functional_responsibilities].map do |item|
           "*#{::I18n.t('field_' + item.to_s, :default => item.to_s.humanize)}:*\n#{self.send(item)}" if self.send(item).present?
         end.join("\n\n")
-    ).try(:id)
-    begin
-      User.current.approvers.each do |user|
-        ApprovalItem.create(:user_id => user.id, :issue_id => issue_id)
-      end
-    rescue
-      #TODO errors.add
-    end
-    self.update_attribute(:issue_id, issue_id)
+    )
   end
 end
