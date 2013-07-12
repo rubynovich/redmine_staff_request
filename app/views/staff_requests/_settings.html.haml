@@ -3,10 +3,10 @@
   = select_tag("settings[principal_id]", principals_options_for_select(Principal.active.all, (Principal.find(@settings[:principal_id]) rescue nil)), :prompt => t(:prompt_please_select))
 %p
   %label= l(:label_project)
-  = select_tag("settings[project_id]", project_tree_options_for_select(Project.active.all(:order => :name), :selected => (Project.find(@settings[:project_id]) rescue nil)), :prompt => t(:prompt_please_select))
+  = select_tag("settings[project_id]", project_tree_options_for_select(Project.active.all, :selected => (Project.find(@settings[:project_id]) rescue nil)), :prompt => t(:prompt_please_select))
 %p
   %label= l(:label_tracker)
-  = select_tag("settings[tracker_id]", options_from_collection_for_select(Tracker.all(:order => :position), :id, :name, (@settings[:tracker_id].to_i rescue nil)), :prompt => t(:prompt_please_select))
+  = select_tag("settings[tracker_id]", options_from_collection_for_select(Tracker.all, :id, :name, (@settings[:tracker_id].try(:to_i))), :prompt => t(:prompt_please_select))
 %p
   %label= l(:label_duration)
   = text_field_tag("settings[duration]", @settings[:duration], :size => 5)
