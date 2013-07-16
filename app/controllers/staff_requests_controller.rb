@@ -66,6 +66,20 @@ class StaffRequestsController < ApplicationController
     end
   end
 
+  def autocomplete_for_name
+    autocomplete_for_field(:name)
+  end
+
+  def autocomplete_for_department_name
+    autocomplete_for_field(:department_name)
+  end
+
+
+  def autocomplete_for_boss_name
+    autocomplete_for_field(:boss_name)
+  end
+
+
   private
     def object_class_name
       StaffRequest
@@ -94,4 +108,14 @@ class StaffRequestsController < ApplicationController
     def require_staff_request_manager
       (render_403; return false) unless User.current.staff_request_manager?
     end
+
+    def autocomplete_for_field(field)
+      completions = StaffRequest.where("#{field} LIKE ?", "#{params[:term]}%").
+        order(field).
+        uniq.
+        limit(10).
+        map{|l| { 'id' => l.id, 'label' => l.send(field), 'value' => l.send(field)} }  
+      render :text => completions.to_json, :layout => false
+    end
+
 end
