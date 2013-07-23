@@ -68,25 +68,25 @@
 
     - %w{created_on}.each do |type_date|
       %br
-      %label=l(:"field_#{type_date}") + ":"
-      - %w{all}.each do |key|
-        - if params[:"time_period_#{type_date}"] == key
-          %strong
-            = l(:"label_#{key}")
-        - else
-          = link_to l(:"label_#{key}"), params.merge( :"time_period_#{type_date}" => key, :"#{type_date}" => "" )
+      %label=l(:"label_period") + ":"
+      -# - %w{all}.each do |key|
+      -#   - if params[:"time_period_#{type_date}"] == key
+      -#     %strong
+      -#       = l(:"label_#{key}")
+      -#   - else
+      -#     = link_to l(:"label_#{key}"), params.merge( :"time_period_#{type_date}" => key, :"#{type_date}" => "" )
 
-      = "/"
+      -# = "/"
       %input{:id => type_date, :name => type_date, :size => 10, :onchange => "this.form.submit(); return false;", :value => params[type_date]}
       = calendar_for(type_date)
 
-      - time_periods.each do |key|
+      - StaffRequest.time_periods.each do |key|
         = "/"
         - if params[:"time_period_#{type_date}"] == key
           %strong
-            = l(:"label_#{key}")
+            = l(:"label_period_#{key}")
         - else
-          = link_to l(:"label_#{key}"), params.merge( :"time_period_#{type_date}" => key, :"#{type_date}" => "" )
+          = link_to l(:"label_period_#{key}"), params.merge( :"time_period_#{type_date}" => key, :"#{type_date}" => "" )
     %br
 
   %form{:method => :get}

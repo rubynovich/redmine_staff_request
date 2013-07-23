@@ -44,3 +44,16 @@ ru:
       - "Нормальный"
       - "Низкий"
   message_staff_request_subject: "[Заявка на персонал] %{name}, %{position_count} шт."
+
+  label_period: Период 
+
+  label_period_any: любой
+  label_period_today: сегодня
+  label_period_yesterday: вчера
+  label_period_last_week: предыдущая неделя
+  label_period_this_week: эта неделя
+  label_period_last_month: предыдущий месяц
+  label_period_this_month: этот месяц
+  label_period_last_year: прошлый год
+  label_period_this_year: этот год
+  

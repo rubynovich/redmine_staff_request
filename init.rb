@@ -22,9 +22,13 @@ Rails.configuration.to_prepare do
     require "staff_request_#{cl}_patch"
   end
 
+  require_dependency 'staff_request'
+  require 'time_period_scope'
+
   [
-    [Issue, StaffRequestPlugin::IssuePatch],
-    [User, StaffRequestPlugin::UserPatch]
+   [Issue, StaffRequestPlugin::IssuePatch],
+   [User, StaffRequestPlugin::UserPatch],
+   [StaffRequest, TimePeriodScope]
   ].each do |cl, patch|
     cl.send(:include, patch) unless cl.included_modules.include? patch
   end
