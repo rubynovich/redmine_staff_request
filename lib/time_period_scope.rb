@@ -1,5 +1,6 @@
 module TimePeriodScope
   def self.included(base)
+
     base.extend(ClassMethods)
 
     base.send(:include, InstanceMethods)
@@ -7,6 +8,12 @@ module TimePeriodScope
     base.class_eval do
 
       unloadable
+
+      unless singleton_methods.include? :time_periods
+        def self.time_periods
+          %w{any today yesterday last_week this_week last_month this_month last_year this_year}
+        end
+      end
 
       scope :time_period, lambda {|q, field|
         today = Date.today
@@ -44,9 +51,12 @@ module TimePeriodScope
   end
 
   module ClassMethods
-    def time_periods
-      %w{yesterday last_week this_week last_month this_month last_year this_year any}
-    end
+
+        # def time_periods
+        #   %w{yesterday last_week this_week last_month this_month last_year this_year any}
+        # end
+
+
   end
 
   module InstanceMethods
