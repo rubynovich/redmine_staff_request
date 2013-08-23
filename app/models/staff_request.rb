@@ -32,8 +32,7 @@ class StaffRequest < ActiveRecord::Base
   scope :like_field, lambda {|q, field|
     if q.present?
       {:conditions =>
-        ["LOWER(:field) LIKE :p OR :field LIKE :p",
-        {:field => field, :p => "%#{q.to_s.downcase}%"}]}
+        ["LOWER(#{field} LIKE LOWER(:p)", "%#{q.to_s.downcase}%"]}
     end
   }
 
