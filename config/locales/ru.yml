@@ -32,6 +32,7 @@ ru:
       - "ООО НВК"
       - "ООО ГорКапСтрой"
       - "ООО НПП Строительство"
+      - "ООО ЭТП СтройТорги"
     position_type_name:
       - "Новая"
       - "Замена"
@@ -45,7 +46,7 @@ ru:
       - "Низкий"
   message_staff_request_subject: "[Заявка на персонал] %{name}, %{position_count} шт."
 
-  label_period: Период 
+  label_period: Период
 
   label_period_any: любой
   label_period_today: сегодня
@@ -56,4 +57,3 @@ ru:
   label_period_this_month: этот месяц
   label_period_last_year: прошлый год
   label_period_this_year: этот год
-  
