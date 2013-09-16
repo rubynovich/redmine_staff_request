@@ -8,7 +8,7 @@ class StaffRequest < ActiveRecord::Base
 
   validates_presence_of :name, :author_id, :company_name, :department_name,
     :boss_name, :position_type_name, :employment_type_name, :require_education_name,
-    :priority_id, :position_count, :require_program_skills, :require_experience,
+    :priority_id, :position_count, :require_program_skills,
     :functional_responsibilities
 
   before_create :add_issue
