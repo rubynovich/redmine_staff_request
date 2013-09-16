@@ -8,7 +8,7 @@ class StaffRequestManagersController < ApplicationController
   before_filter :find_approver_candidates, :only => [:edit, :autocomplete_for_approver]
 
   def index
-    @collection = model_name.all(:order => "users.lastname, users.firstname", :include => :user).select(&:user)
+    @collection = model_name.visible.all(:order => "users.lastname, users.firstname", :include => :user).select(&:user)
   end
 
   def update
