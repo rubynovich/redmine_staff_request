@@ -2,7 +2,7 @@
 ru:
   # my_label: "My label"
   label_staff_request_plural: "Заявки на персонал"
-  label_staff_request_name: "Наименование позиции"
+  label_staff_request_name: "Вакансия"
   label_staff_request: "Заявка на персонал"
   label_new_staff_request: "Новая заявка на персонал"
   label_staff_request_new: "Добавить заявку на персонал"
@@ -20,8 +20,8 @@ ru:
   field_employment_type_name: "Тип занятости"
   field_require_education_name: "Образование"
   field_priority_name: "Приоритет"
-  field_require_program_skills: "Навыки работы с ПО"
-  field_require_experience: "Опыт работы"
+  field_require_program_skills: "Требования (образование, опыт работы, знание программ, нормативных документов и др.)"
+  field_require_experience: "-Опыт работы"
   field_functional_responsibilities: "Функциональные обязанности"
   staff_requiest:
     require_education_name:
