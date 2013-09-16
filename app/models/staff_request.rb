@@ -14,7 +14,7 @@ class StaffRequest < ActiveRecord::Base
   before_create :add_issue
 
   scope :visible, lambda{
-    if !User.current.admin? && !User.current.staff_request_manager?
+    if !User.current.admin?
       where("#{self.table_name}.author_id = ?", User.current.id)
     end
   }
