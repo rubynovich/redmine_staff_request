@@ -64,7 +64,7 @@ class StaffRequest < ActiveRecord::Base
         :position_type_comment, :employment_type_name, :require_education_name].map do |item|
           "*#{::I18n.t('field_' + item.to_s, :default => item.to_s.humanize)}:* #{self.send(item)}" if self.send(item).present?
         end.compact.join("\n") + "\n\n" +
-        [:require_program_skills, :require_experience, :functional_responsibilities].map do |item|
+        [:require_program_skills, :functional_responsibilities].map do |item|
           "*#{::I18n.t('field_' + item.to_s, :default => item.to_s.humanize)}:*\n#{self.send(item)}" if self.send(item).present?
         end.join("\n\n"),
       is_private: true
