@@ -4,10 +4,11 @@ class StaffRequest < ActiveRecord::Base
   belongs_to :issue, dependent: :destroy
   has_one :status, through: :issue
   belongs_to :author, class_name: 'User', foreign_key: 'author_id'
+  belongs_to :boss, class_name: 'User', foreign_key: 'boss_id'
   belongs_to :priority, class_name: 'IssuePriority', foreign_key: 'priority_id'
 
   validates_presence_of :name, :author_id, :company_name, :department_name,
-    :boss_name, :position_type_name, :employment_type_name, :require_education_name,
+    :boss_name, :boss_id, :position_type_name, :employment_type_name, :require_education_name,
     :priority_id, :position_count, :require_program_skills,
     :functional_responsibilities
 

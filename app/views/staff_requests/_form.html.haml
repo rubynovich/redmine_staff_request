@@ -16,6 +16,8 @@
     :javascript
       observeAutocompleteField('staff_request_boss_name', '#{escape_javascript autocomplete_for_boss_name_staff_requests_path}')
 
+    %p= f.select :boss_id, boss_for_select, required: true, prompt: t(:prompt_please_select)
+
     %p= f.text_field :position_count, :required => true, :size => 5
 
   .splitcontentright
@@ -23,7 +25,7 @@
     %p= f.text_field :position_type_comment, :size => 20
     %p= f.select :employment_type_name, employment_type_name_for_select, :required => true, :prompt => t(:prompt_please_select)
     %p= f.select :require_education_name, require_education_name_for_select, :required => true, :prompt => t(:prompt_please_select)
-    %p= f.select :priority_id, priority_id_for_select.map{ |item| [item.name, item.id] }, :required => true, :prompt => t(:prompt_please_select)
+    %p= f.select :priority_id, priority_id_for_select, :required => true, :prompt => t(:prompt_please_select)
 
   %div{:style=>"clear:both"}
 
