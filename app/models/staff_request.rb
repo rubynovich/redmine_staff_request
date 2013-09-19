@@ -13,6 +13,7 @@ class StaffRequest < ActiveRecord::Base
     :functional_responsibilities
 
   before_create :add_issue
+  after_create :add_approval_item
 
   scope :visible, lambda{
     if !User.current.admin? && !User.current.staff_manager?
@@ -70,6 +71,11 @@ class StaffRequest < ActiveRecord::Base
         end.join("\n\n"),
       is_private: true
     )
+  end
+
+  def add_approval_item
+    ApprovalItem.create(issue_id: self.issue_id, user_id: self.boss_id)
+  rescue
   end
 
 end
