@@ -91,7 +91,7 @@ class StaffRequestsController < ApplicationController
     end
 
     def find_object
-      @object = object_class_name.find(params[:id])
+      @object = object_class_name.visible.find(params[:id])
     end
 
     def new_object
