@@ -20,11 +20,11 @@ module StaffRequestsHelper
   end
 
   def priority_id_for_select
-    IssuePriority.order(:position).map{ |item| [item.name, item.id] }
+    IssuePriority.order(:position)
   end
 
   def boss_id_for_select
-    User.active.order(:lastname, :firstname).map{ |item| [item.name, item.id] }
+    User.active.order(:lastname, :firstname)
   end
 
   def time_periods

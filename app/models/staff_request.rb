@@ -8,14 +8,14 @@ class StaffRequest < ActiveRecord::Base
   belongs_to :priority, class_name: 'IssuePriority', foreign_key: 'priority_id'
 
   validates_presence_of :name, :author_id, :company_name, :department_name,
-    :boss_name, :boss_id, :position_type_name, :employment_type_name, :require_education_name,
+    :boss_id, :position_type_name, :employment_type_name, :require_education_name,
     :priority_id, :position_count, :require_program_skills,
     :functional_responsibilities
 
   before_create :add_issue
 
   scope :visible, lambda{
-    if !User.current.admin?
+    if !User.current.admin? && !staff_manager?
       where("#{self.table_name}.author_id = ?", User.current.id)
     end
   }
@@ -70,5 +70,20 @@ class StaffRequest < ActiveRecord::Base
         end.join("\n\n"),
       is_private: true
     )
+  end
+
+private
+
+  def staff_manager?
+    begin
+      principal = Principal.find(Setting[:plugin_redmine_staff_request][:assigned_to_id])
+      if principal.is_a?(Group)
+        principal.users.include?(User.current)
+      elsif principal.is_a?(User)
+        principal == User.current
+      end
+    rescue
+      nil
+    end
   end
 end

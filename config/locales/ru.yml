@@ -14,6 +14,7 @@ ru:
   field_company_name: "Компания"
   field_department_name: "Подразделение"
   field_boss_name: "Руководитель"
+  field_boss: "Руководитель"
   field_position_count: "Количество позиций"
   field_position_type_name: "Тип позиции"
   field_position_type_comment: "Дополнение к типу позиции"

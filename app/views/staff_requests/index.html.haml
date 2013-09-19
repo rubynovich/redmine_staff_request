@@ -34,7 +34,7 @@
             %td{:align=>"left"}= link_to h("#{item.name} (#{item.position_count})"), :action => :show, :id => item.id
             %td{:align=>"center"}= h(item.company_name)
             %td{:align=>"center"}= h(item.department_name)
-            %td{:align=>"center"}= h(item.boss_name)
+            %td{:align=>"center"}= link_to_user item.boss
             %td{:align=>"center"}= h(item.position_type_name)
             %td{:align=>"center"}= h(item.employment_type_name)
             %td{:align=>"center"}= h(item.require_education_name)
