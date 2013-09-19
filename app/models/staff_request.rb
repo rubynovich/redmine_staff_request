@@ -15,7 +15,7 @@ class StaffRequest < ActiveRecord::Base
   before_create :add_issue
 
   scope :visible, lambda{
-    if !User.current.admin? && !staff_manager?
+    if !User.current.admin? && !User.current.staff_manager?
       where("#{self.table_name}.author_id = ?", User.current.id)
     end
   }
@@ -72,18 +72,4 @@ class StaffRequest < ActiveRecord::Base
     )
   end
 
-private
-
-  def staff_manager?
-    begin
-      principal = Principal.find(Setting[:plugin_redmine_staff_request][:assigned_to_id])
-      if principal.is_a?(Group)
-        principal.users.include?(User.current)
-      elsif principal.is_a?(User)
-        principal == User.current
-      end
-    rescue
-      nil
-    end
-  end
 end
