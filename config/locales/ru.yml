@@ -1,5 +1,8 @@
 # Russian strings go here for Rails i18n
 ru:
+
+  label_workflow_menu: Организация работы
+
   # my_label: "My label"
   label_staff_request_plural: "Заявки на персонал"
   label_staff_request_name: "Наименование позиции"

@@ -11,10 +11,26 @@ Redmine::Plugin.register :redmine_staff_request do
                      },
          :partial => 'staff_requests/settings'
 
-  menu :top_menu, :staff_requests, {:controller => :staff_requests, :action => :index}, :caption => :label_staff_request_plural, :if => Proc.new{User.current.staff_request_manager?}
 
-#  menu :admin_menu, :staff_request_managers,
-#    {:controller => :staff_request_managers, :action => :index}, :caption => :label_staff_request_manager_plural, :html => {:class => :users}
+  Redmine::MenuManager.map :top_menu do |menu| 
+
+    unless menu.exists?(:workflow)
+      menu.push(:workflow, "#", 
+                { :after => :internal_intercourse,
+                  :parent => :top_menu, 
+                  :caption => :label_workflow_menu
+                })
+    end
+
+    menu.push(:staff_requests, 
+              {:controller => :staff_requests, :action => :index},
+              { :parent => :workflow,
+                :caption => :label_staff_request_plural,
+                :if => Proc.new{User.current.staff_request_manager?}
+              })
+
+  end
+
 end
 
 Rails.configuration.to_prepare do
