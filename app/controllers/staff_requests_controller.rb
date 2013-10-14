@@ -17,6 +17,7 @@ class StaffRequestsController < ApplicationController
     @limit = per_page_option
 
     @scope = object_class_name.
+      visible.
       issue_status(params[:status_id]).
       issue_priority(params[:priority_id]).
       like_field(params[:name], :name).
@@ -90,7 +91,7 @@ class StaffRequestsController < ApplicationController
     end
 
     def find_object
-      @object = object_class_name.find(params[:id])
+      @object = object_class_name.visible.find(params[:id])
     end
 
     def new_object
@@ -114,7 +115,7 @@ class StaffRequestsController < ApplicationController
         order(field).
         uniq.
         limit(10).
-        map{|l| { 'id' => l.id, 'label' => l.send(field), 'value' => l.send(field)} }  
+        map{|l| { 'id' => l.id, 'label' => l.send(field), 'value' => l.send(field)} }
       render :text => completions.to_json, :layout => false
     end
 

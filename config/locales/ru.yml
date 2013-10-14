@@ -5,7 +5,7 @@ ru:
 
   # my_label: "My label"
   label_staff_request_plural: "Заявки на персонал"
-  label_staff_request_name: "Наименование позиции"
+  label_staff_request_name: "Вакансия"
   label_staff_request: "Заявка на персонал"
   label_new_staff_request: "Новая заявка на персонал"
   label_staff_request_new: "Добавить заявку на персонал"
@@ -17,14 +17,15 @@ ru:
   field_company_name: "Компания"
   field_department_name: "Подразделение"
   field_boss_name: "Руководитель"
+  field_boss: "Руководитель"
   field_position_count: "Количество позиций"
   field_position_type_name: "Тип позиции"
   field_position_type_comment: "Дополнение к типу позиции"
   field_employment_type_name: "Тип занятости"
   field_require_education_name: "Образование"
   field_priority_name: "Приоритет"
-  field_require_program_skills: "Навыки работы с ПО"
-  field_require_experience: "Опыт работы"
+  field_require_program_skills: "Требования (образование, опыт работы, знание программ, нормативных документов и др.)"
+  field_require_experience: "-Опыт работы"
   field_functional_responsibilities: "Функциональные обязанности"
   staff_requiest:
     require_education_name:
@@ -35,6 +36,7 @@ ru:
       - "ООО НВК"
       - "ООО ГорКапСтрой"
       - "ООО НПП Строительство"
+      - "ООО ЭТП СтройТорги"
     position_type_name:
       - "Новая"
       - "Замена"
@@ -48,7 +50,7 @@ ru:
       - "Низкий"
   message_staff_request_subject: "[Заявка на персонал] %{name}, %{position_count} шт."
 
-  label_period: Период 
+  label_period: Период
 
   label_period_any: любой
   label_period_today: сегодня
@@ -59,4 +61,3 @@ ru:
   label_period_this_month: этот месяц
   label_period_last_year: прошлый год
   label_period_this_year: этот год
-  

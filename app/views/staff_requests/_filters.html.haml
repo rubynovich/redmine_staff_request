@@ -5,7 +5,7 @@
   %legend= l(:label_filter_plural)
 
   %form{:method => :get}
-    - [:name, :boss_name, :department_name].each do |item|
+    - [:name, :department_name].each do |item|
       = hidden_field_tag item, params[item]
 
     .inline-block
@@ -17,6 +17,12 @@
             %option{:value => item, :selected => "selected"}= item
           - else
             %option{:value => item}= item
+
+    .inline-block
+      %label{for: 'boss_id'}= l(:field_boss) + ":"
+      %select{id: 'boss_id', name: 'boss_id', class: "small", onchange: "this.form.submit(); return false;"}
+        %option
+        = options_from_collection_for_select(boss_id_for_select, :id, :name, params[:boss_id] && params[:boss_id].to_i)
 
     .inline-block
       %label{:for=>'position_type_name'}= l(:field_position_type_name) + ":"
@@ -90,14 +96,11 @@
     %br
 
   %form{:method => :get}
-    - [:company_name, :position_type_name, :employment_type_name, :require_education_name, :status_id, :priority_id, :author_id, :time_period_created_on].each do |item|
+    - [:boss_id,:company_name,:position_type_name,:employment_type_name,:require_education_name,:status_id,:priority_id,:author_id,:time_period_created_on].each do |item|
       = hidden_field_tag item, params[item]
 
     %label{:for=>'name'}= l(:label_staff_request_name) + ":"
     = text_field_tag 'name', params[:name], :size => 30
-
-    %label{:for=>'boss_name'}= l(:field_boss_name) + ":"
-    = text_field_tag 'boss_name', params[:boss_name], :size => 30
 
     %label{:for=>'department_name'}= l(:field_department_name) + ":"
     = text_field_tag 'department_name', params[:department_name], :size => 30
