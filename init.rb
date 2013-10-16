@@ -14,19 +14,12 @@ Redmine::Plugin.register :redmine_staff_request do
 
   Redmine::MenuManager.map :top_menu do |menu| 
 
-    unless menu.exists?(:workflow)
-      menu.push(:workflow, "#", 
-                { :after => :internal_intercourse,
-                  :parent => :top_menu, 
-                  :caption => :label_workflow_menu
-                })
-    end
-
+    parent = menu.exists?(:workflow) ? :workflow : :top_menu
     menu.push(:staff_requests, 
               {:controller => :staff_requests, :action => :index},
-              { :parent => :workflow,
+              { :parent => parent,
                 :caption => :label_staff_request_plural,
-                :if => Proc.new{User.current.staff_request_manager?}
+                :if => Proc.new{ User.current.staff_request_manager? }
               })
 
   end
