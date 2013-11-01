@@ -36,6 +36,9 @@
       %td= format_date(@object.created_on)
       %th= l(:field_author)+":"
       %td= link_to_user @object.author
+    %tr
+      %th= l(:field_issue)+":"
+      %td{colspan: 3}= link_to_issue @object.issue, project: false, subject: false, tracker: false
   %hr
   %p
     %strong= l(:field_require_program_skills)
