@@ -1,6 +1,5 @@
 # English strings go here for Rails i18n
 en:
-  # my_label: "My label"
   label_period: Period
 
   label_period_any: any
