@@ -5,6 +5,8 @@ class StaffRequestsController < ApplicationController
   helper :issues
   helper :sort
   include SortHelper
+  helper :custom_fields
+  include CustomFieldsHelper
 
   before_filter :require_staff_request_manager
   before_filter :find_object, :only => [:edit, :update, :show, :destroy]
