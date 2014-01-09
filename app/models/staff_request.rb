@@ -17,7 +17,11 @@ class StaffRequest < ActiveRecord::Base
 
   scope :visible, lambda{
     if !User.current.admin? && !User.current.staff_manager?
-      where("#{self.table_name}.author_id = ?", User.current.id)
+
+      watchers_condition  = "#{self.table_name}.issue_id IN (select watchable_id from watchers where watchable_type='Issue' and user_id= ?)"
+      approvers_condition = "#{self.table_name}.issue_id IN (select issue_id from approval_items where user_id= ?)"
+
+      where("#{self.table_name}.author_id = ? OR #{watchers_condition} OR #{approvers_condition}", User.current.id, User.current.id, User.current.id)
     end
   }
 
