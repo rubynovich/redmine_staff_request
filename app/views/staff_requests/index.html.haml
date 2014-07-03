@@ -29,7 +29,7 @@
           %tr{:class=>cycle("odd", "even")}
             %td{:align=>"center"}
               - if item.issue.present?
-                = link_to "##{item.issue.id}", :controller => :issues, :action => :show, :id => item.issue.id
+                = link_to "##{item.issue.id}", controller: 'issues', action: 'show', id: item.issue.id
             %td{:align=>"center"}= h(item.status)
             %td{:align=>"left"}= link_to h("#{item.name} (#{item.position_count})"), :action => :show, :id => item.id
             %td{:align=>"center"}= h(item.company_name)

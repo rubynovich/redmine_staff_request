@@ -13,6 +13,7 @@ class StaffRequest < ActiveRecord::Base
     :functional_responsibilities
 
   before_create :add_issue
+  before_update :add_issue, if: -> { self.issue.blank? }
   after_create :add_approval_item
 
   scope :visible, lambda{

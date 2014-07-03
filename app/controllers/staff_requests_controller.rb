@@ -24,7 +24,8 @@ class StaffRequestsController < ApplicationController
       issue_priority(params[:priority_id]).
       like_field(params[:name], :name).
       like_field(params[:department_name], :department_name).
-      like_field(params[:boss_name], :boss_name).
+#      like_field(params[:boss_name], :boss_name).
+      eql_field(params[:boss_id], :boss_id).
       eql_field(params[:company_name], :company_name).
       eql_field(params[:position_type_name], :position_type_name).
       eql_field(params[:employment_type_name], :employment_type_name).
