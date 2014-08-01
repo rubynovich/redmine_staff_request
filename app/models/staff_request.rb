@@ -74,7 +74,7 @@ class StaffRequest < ActiveRecord::Base
         [:require_program_skills, :functional_responsibilities].map do |item|
           "*#{::I18n.t('field_' + item.to_s, :default => item.to_s.humanize)}:*\n#{self.send(item)}" if self.send(item).present?
         end.join("\n\n"),
-      is_private: true
+      #is_private: true
     )
   end
 
