@@ -44,7 +44,7 @@ ru:
       - "Высокий"
       - "Нормальный"
       - "Низкий"
-  message_staff_request_subject: "[Заявка на персонал] %{name}, %{position_count} шт."
+  message_staff_request_subject: "[Заявка на персонал] %{name}, %{position_count} чел."
 
   label_period: Период
 
